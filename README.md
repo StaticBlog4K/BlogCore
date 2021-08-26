@@ -1,6 +1,6 @@
-# Blog Core
+# BlogCore
 
-> StaticBlog4K 的核心模块，配置页面管理、渲染、备份等操作
+> StaticBlog4K 的核心模块
 
 ## LICENSE
 

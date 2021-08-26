@@ -1,28 +1,26 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+group = "com.github.StaticBlog4K.BlogCore"
 
-plugins {
-    kotlin("jvm")
-}
-java.sourceCompatibility = JavaVersion.VERSION_11
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation(kotlin("reflect"))
-    implementation(kotlin("stdlib"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
-    testImplementation("org.junit.platform:junit-platform-launcher:1.7.2")
-}
-
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
+    dependencies {
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21")
     }
 }
 
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions.jvmTarget = "11"
+allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
+    for (childProject in childProjects.values) {
+        delete(childProject.buildDir)
+    }
 }
